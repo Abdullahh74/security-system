@@ -51,12 +51,11 @@ export function ReviewLineItem({ line }: { line: ReviewLine }) {
             {line.unitSuffix ?? ""}
           </span>
         )}
-        <span
-          className={`text-sm font-semibold ${lineTotal === 0 ? "text-primary" : compareLineTotal != null ? "text-primary" : "text-heading-text"}`}
-        >
+        <span className="text-sm font-semibold text-primary">
           {lineTotal === 0 ? "FREE" : `${formatMoney(lineTotal)}${line.unitSuffix ?? ""}`}
         </span>
       </div>
     </div>
   );
 }
+

@@ -10,7 +10,7 @@ function Builder() {
   const { products } = useBundle();
 
   return (
-    <div className="grid grid-cols-1 items-start gap-4 xl:grid-cols-[minmax(0,1fr)_440px]">
+    <div className="grid grid-cols-1 items-start gap-4 xl:grid-cols-[minmax(0,1fr)_400px]">
       <div className="flex flex-col gap-0.5">
         {STEPS.map((step) => (
           <StepAccordion key={step.id} step={step} products={products.filter((p) => p.stepId === step.id)} />
@@ -49,3 +49,4 @@ export default function App() {
     </div>
   );
 }
+
