@@ -9,27 +9,27 @@ import minusUrl from "../../assets/icons/minus.svg";
 import plusUrl from "../../assets/icons/plus.svg";
 import placeholderUrl from "../../assets/icons/placeholder.svg";
 
-export function CameraIcon(props: ImgHTMLAttributes<HTMLImageElement>) {
+export function CameraIcon(props: Readonly<ImgHTMLAttributes<HTMLImageElement>>) {
   return <img src={cameraUrl} alt="Camera" {...props} />;
 }
 
-export function ShieldIcon(props: ImgHTMLAttributes<HTMLImageElement>) {
+export function ShieldIcon(props: Readonly<ImgHTMLAttributes<HTMLImageElement>>) {
   return <img src={shieldUrl} alt="Shield" {...props} />;
 }
 
-export function SensorIcon(props: ImgHTMLAttributes<HTMLImageElement>) {
+export function SensorIcon(props: Readonly<ImgHTMLAttributes<HTMLImageElement>>) {
   return <img src={sensorUrl} alt="Sensor" {...props} />;
 }
 
-export function GridIcon(props: ImgHTMLAttributes<HTMLImageElement>) {
+export function GridIcon(props: Readonly<ImgHTMLAttributes<HTMLImageElement>>) {
   return <img src={gridUrl} alt="Grid" {...props} />;
 }
 
-export function TruckIcon(props: ImgHTMLAttributes<HTMLImageElement>) {
+export function TruckIcon(props: Readonly<ImgHTMLAttributes<HTMLImageElement>>) {
   return <img src={truckUrl} alt="Truck" {...props} />;
 }
 
-export function ChevronIcon({ open, ...props }: ImgHTMLAttributes<HTMLImageElement> & { open?: boolean }) {
+export function ChevronIcon({ open, ...props }: Readonly<ImgHTMLAttributes<HTMLImageElement>> & Readonly<{ open?: boolean }>) {
   return (
     <img
       src={chevronUrl}
@@ -40,14 +40,15 @@ export function ChevronIcon({ open, ...props }: ImgHTMLAttributes<HTMLImageEleme
   );
 }
 
-export function MinusIcon(props: ImgHTMLAttributes<HTMLImageElement>) {
+export function MinusIcon(props: Readonly<ImgHTMLAttributes<HTMLImageElement>>) {
   return <img src={minusUrl} alt="Minus" {...props} />;
 }
 
-export function PlusIcon(props: ImgHTMLAttributes<HTMLImageElement>) {
+export function PlusIcon(props: Readonly<ImgHTMLAttributes<HTMLImageElement>>) {
   return <img src={plusUrl} alt="Plus" {...props} />;
 }
 
-export function ImagePlaceholderIcon(props: ImgHTMLAttributes<HTMLImageElement>) {
+export function ImagePlaceholderIcon(props: Readonly<ImgHTMLAttributes<HTMLImageElement>>) {
   return <img src={placeholderUrl} alt="Placeholder" {...props} />;
 }
+
