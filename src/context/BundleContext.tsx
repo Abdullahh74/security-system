@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useMemo, useReducer, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useReducer, type ReactNode } from "react";
 import type { Product, SelectionMap, StepId } from "../types";
 import { DEFAULT_VARIANT_KEY, seedActiveVariant, seedSelections } from "../lib/bundle";
 import { clearSavedSystem, loadSavedSystem, saveSystem } from "../hooks/useSavedSystem";
@@ -8,6 +8,14 @@ interface State {
   activeVariant: Record<string, string>;
   openStep: StepId | null;
   justSaved: boolean;
+}
+
+function getInitialOpenStep(): StepId | null {
+  if (typeof window === "undefined") {
+    return "cameras";
+  }
+
+  return window.innerWidth >= 768 ? "cameras" : null;
 }
 
 type Action =
@@ -68,17 +76,37 @@ export function BundleProvider({ products, children }: { products: Product[]; ch
       return {
         selections: saved.selections,
         activeVariant: saved.activeVariant,
-        openStep: "cameras",
+        openStep: getInitialOpenStep(),
         justSaved: false,
       };
     }
+
     return {
       selections: seedSelections(products),
       activeVariant: seedActiveVariant(products),
-      openStep: "cameras",
+      openStep: getInitialOpenStep(),
       justSaved: false,
     };
   });
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const mediaQuery = window.matchMedia("(min-width: 768px)");
+    const syncOpenStep = () => {
+      dispatch({
+        type: "SET_OPEN_STEP",
+        stepId: mediaQuery.matches ? "cameras" : null,
+      });
+    };
+
+    syncOpenStep();
+    mediaQuery.addEventListener("change", syncOpenStep);
+
+    return () => mediaQuery.removeEventListener("change", syncOpenStep);
+  }, []);
 
   const setQuantity = useCallback((productId: string, variantId: string | undefined, quantity: number) => {
     dispatch({ type: "SET_QUANTITY", productId, variantId: variantId ?? DEFAULT_VARIANT_KEY, quantity });

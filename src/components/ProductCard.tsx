@@ -20,14 +20,14 @@ export function ProductCard({ product }: { product: Product }) {
 
   return (
     <div
-      className={`product-card relative flex h-full flex-col gap-4 rounded-card border bg-white p-4 shadow-card transition-colors ${
+      className={`product-card relative flex h-full flex-col gap-3 rounded-card border bg-white p-3 shadow-card transition-colors xl:flex-row xl:gap-4 xl:p-4 ${
         selected ? "border-primary" : "border-border-light"
       }`}
     >
       {product.badge && <Badge label={product.badge} />}
 
-      <div className="flex h-full items-stretch gap-4">
-        <div className="relative h-full w-32 flex-shrink-0 overflow-hidden rounded-[28px] p-3">
+      <div className="flex h-full flex-col gap-3 xl:flex-row xl:items-stretch xl:gap-4">
+        <div className="relative h-32 shrink-0 overflow-hidden rounded-2xl p-2 xl:h-auto xl:w-32 xl:rounded-[28px] xl:p-3">
           <ProductImage src={image} alt={product.title} className="h-full w-full" />
         </div>
 
@@ -70,15 +70,13 @@ export function ProductCard({ product }: { product: Product }) {
               <span />
             )}
 
-              <div className="flex flex-col items-end gap-1 text-right">
-                {product.compareAtPrice != null && (
-                  <span className="product-price-strike">{formatMoney(product.compareAtPrice)}</span>
-                )}
-                <span className={`product-price ${product.compareAtPrice != null ? "product-price--discounted" : ""}`}>
-                  {formatMoney(product.price)}
-                  {product.unitSuffix ?? ""}
-                </span>
-              </div>
+            <div className="flex flex-col items-end gap-1 text-right">
+              {product.compareAtPrice != null && <span className="product-price-strike">{formatMoney(product.compareAtPrice)}</span>}
+              <span className={`product-price ${product.compareAtPrice != null ? "product-price--discounted" : ""}`}>
+                {formatMoney(product.price)}
+                {product.unitSuffix ?? ""}
+              </span>
+            </div>
           </div>
         </div>
       </div>
